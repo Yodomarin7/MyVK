@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.order)  {
             0 -> {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/activity_get_users.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/activity_login_vk.xml" value="0.18" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/activity_main.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_add_group.xml" value="0.22" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_blank.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_blank2.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_get_groups.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_get_users.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_login_vk.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_users_params.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/fragment_weqewqe.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/group_item.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/list_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/rcv_item.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/Nebur/AndroidStudioProjects/MyVK/app/src/main/res/layout/user_item.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/SuranM/AndroidStudioProjects/MyVK/app/src/main/res/drawable/ic_baseline_arrow_24.xml" value="0.136" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
+  </component>
+</project>

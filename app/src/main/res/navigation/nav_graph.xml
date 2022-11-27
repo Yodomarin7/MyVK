@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/getGroupsFragment">
+
+    <fragment
+        android:id="@+id/getGroupsFragment"
+        android:name="com.example.myvk.screens.GetGroupFragment"
+        android:label="fragment_get_groups"
+        tools:layout="@layout/fragment_get_groups" >
+        <action
+            android:id="@+id/action_getGroupsFragment_to_addGroupFragment"
+            app:destination="@id/addGroupFragment" />
+        <action
+            android:id="@+id/action_getGroupsFragment_to_userParamsFragment"
+            app:destination="@id/userParamsFragment3" />
+        <action
+            android:id="@+id/action_getGroupsFragment_to_loginVkActivity"
+            app:destination="@id/loginVkActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addGroupFragment"
+        android:name="com.example.myvk.screens.AddGroupFragment"
+        android:label="fragment_add_group"
+        tools:layout="@layout/fragment_add_group" />
+    <activity
+        android:id="@+id/loginVkActivity"
+        android:name="com.example.myvk.screens.LoginVkActivity"
+        android:label="activity_login_vk"
+        tools:layout="@layout/activity_login_vk" />
+    <fragment
+        android:id="@+id/userParamsFragment3"
+        android:name="com.example.myvk.screens.UserParamsFragment"
+        android:label="fragment_users_params"
+        tools:layout="@layout/fragment_users_params" />
+
+</navigation>

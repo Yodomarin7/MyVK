@@ -18,10 +18,9 @@ import com.example.domain.models.UserModel
 import com.example.myvk.*
 import com.example.myvk.adapters.UserRecyclerAdapter
 import com.example.myvk.databinding.FragmentUsersParamsBinding
-import com.google.android.material.appbar.MaterialToolbar
+import com.example.myvk.viewmodels.GetGroupViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.NonDisposableHandle.parent
 import javax.inject.Inject
 
 class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
@@ -42,6 +41,7 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
     private lateinit var _showRed: CheckBox
     private lateinit var _showYellow: CheckBox
     private lateinit var _showGreen: CheckBox
+    private lateinit var _showBlack: CheckBox
     private lateinit var _btnGetUsers: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +91,11 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
         _showGreen = view.findViewById(R.id.checkBox3)
         _showGreen.setOnCheckedChangeListener { buttonView, isChecked ->
             getUserViewModel.saveShowGreen(isChecked)
+        }
+
+        _showBlack = view.findViewById(R.id.checkBox4)
+        _showBlack.setOnCheckedChangeListener { buttonView, isChecked ->
+            getUserViewModel.saveShowBlack(isChecked)
         }
 
         _lastSeen = view.findViewById<TextInputLayout>(R.id.editTextDate).editText as TextInputEditText
@@ -144,6 +149,9 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
         getUserViewModel.showGreen.observe(viewLifecycleOwner) { b ->
             _showGreen.isChecked = b
         }
+        getUserViewModel.showBlack.observe(viewLifecycleOwner) { b ->
+            _showBlack.isChecked = b
+        }
 
         getUserViewModel.sex.observe(viewLifecycleOwner) { i ->
             Log.e("NEBUR", "sex.observe")
@@ -195,7 +203,7 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
                 sex = intSex,
                 lastSeen = _lastSeen.text.toString().toInt()
             ),
-            _showRed.isChecked, _showYellow.isChecked,_showGreen.isChecked)
+            _showRed.isChecked, _showYellow.isChecked, _showGreen.isChecked, _showBlack.isChecked)
     }
 
     //btnCancel

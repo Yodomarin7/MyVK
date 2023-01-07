@@ -1,4 +1,4 @@
-package com.example.myvk
+package com.example.myvk.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.*

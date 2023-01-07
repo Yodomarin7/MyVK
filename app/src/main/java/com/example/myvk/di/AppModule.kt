@@ -8,7 +8,7 @@ import com.example.domain.usecase.GetUsersUseCase
 import com.example.domain.usecase.RemoveGroupUseCase
 import com.example.myvk.AddViewModelFactory
 import com.example.myvk.GetUserViewModelFactory
-import com.example.myvk.GetViewModelFactory
+import com.example.myvk.viewmodels.GetViewModelFactory
 import dagger.Module
 import dagger.Provides
 

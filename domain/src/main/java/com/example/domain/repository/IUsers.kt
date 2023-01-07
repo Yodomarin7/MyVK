@@ -27,4 +27,6 @@ interface IUsers {
     suspend fun getUsersDao(): Flow<MutableList<UserModel.Params>>
     suspend fun deleteOneDao(userId: Int)
     suspend fun updateOneDao(userParams: UserModel.Params)
+    suspend fun saveShowBlack(b: Boolean)
+    suspend fun getShowBlack(): Boolean
 }

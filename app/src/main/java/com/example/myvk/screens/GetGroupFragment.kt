@@ -2,21 +2,17 @@ package com.example.myvk.screens
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myvk.*
 import com.example.myvk.adapters.GroupRecyclerAdapter
 import com.example.myvk.databinding.FragmentGetGroupsBinding
+import com.example.myvk.viewmodels.GetGroupViewModel
 
 class GetGroupFragment: Fragment(R.layout.fragment_get_groups) {
     private lateinit var binding: FragmentGetGroupsBinding

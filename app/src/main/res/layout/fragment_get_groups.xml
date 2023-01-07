@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="getGroupViewModel"
-            type="com.example.myvk.GetGroupViewModel" />
+            type="com.example.myvk.viewmodels.GetGroupViewModel" />
         <variable
             name="getGroupFragment"
             type="com.example.myvk.screens.GetGroupFragment" />

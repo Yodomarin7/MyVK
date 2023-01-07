@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.GroupModel
-import com.example.myvk.GetGroupViewModel
+import com.example.myvk.viewmodels.GetGroupViewModel
 import com.example.myvk.R
 import com.example.myvk.screens.MainActivity
-import java.util.*
 
 class GroupRecyclerAdapter(
     _getGroupViewModel: GetGroupViewModel,
@@ -41,7 +40,7 @@ class GroupRecyclerAdapter(
             }
 
 
-            val callback = object : ActionMode.Callback {
+            val callback = object: ActionMode.Callback {
 
                 override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                     menu?.add(Menu.NONE, Menu.NONE, 0, "Delete")
@@ -113,7 +112,7 @@ class GroupRecyclerAdapter(
                 " " + items[pos].lastName + "</a>"
         holder.txt1.text = Html.fromHtml(str)*/
         val item: GroupModel.Params = getItem(position)
-        holder.txtName.text = item.name
+        holder.txtName.text = "${item.name} ${item.id}"
         holder.txtDescr.text = item.description
     }
 }

@@ -37,6 +37,7 @@ class UserVK {
                         val unixTime = (System.currentTimeMillis() / 1000L).toInt()
 
                         itms.forEach {
+
                             val sex = it.sex?.value ?: 0
                             val lastSeen = it.lastSeen?.time ?: 0
                             val tme: Int = (unixTime - lastSeen!!)/60/60/24

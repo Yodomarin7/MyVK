@@ -12,7 +12,7 @@ class UserModel {
     )
 
     enum class Used {
-        NONE, RED, YELLOW, GREEN
+        NONE, RED, YELLOW, GREEN, BLACK
     }
 
     sealed class ResponsParams {

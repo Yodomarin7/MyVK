@@ -50,6 +50,13 @@ class UserRepository(
         return userParamsSharedPreferences.getShowGreen()
     }
 
+    override suspend fun saveShowBlack(b: Boolean) {
+        userParamsSharedPreferences.saveShowBlack(b)
+    }
+    override suspend fun getShowBlack(): Boolean {
+        return userParamsSharedPreferences.getShowBlack()
+    }
+
     override suspend fun getUsersVK(
         grouId: String,
         offset: Int,
@@ -71,6 +78,7 @@ class UserRepository(
                     1 -> { used = UserModel.Used.YELLOW}
                     2 -> { used = UserModel.Used.GREEN}
                     3 -> { used = UserModel.Used.NONE}
+                    4 -> { used = UserModel.Used.BLACK}
                 }
 
                 val user: UserModel.Params = UserModel.Params(
@@ -103,6 +111,9 @@ class UserRepository(
             }
             UserModel.Used.NONE -> {
                 3
+            }
+            UserModel.Used.BLACK -> {
+                4
             }
         }
 

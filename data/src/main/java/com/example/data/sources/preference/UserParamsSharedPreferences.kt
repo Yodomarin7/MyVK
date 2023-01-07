@@ -8,6 +8,7 @@ private const val LAST_SEEN = "last_Seen"
 private const val SHOW_RED = "show_red"
 private const val SHOW_YELLOW = "show_yellow"
 private const val SHOW_GREEN = "show_green"
+private const val SHOW_BLACK = "show_black"
 
 class UserParamsSharedPreferences(private val context: Context) {
 
@@ -32,6 +33,13 @@ class UserParamsSharedPreferences(private val context: Context) {
     }
     fun saveShowGreen(b: Boolean) {
         sharedPreferences.edit().putBoolean(SHOW_GREEN, b).apply()
+    }
+
+    fun getShowBlack(): Boolean {
+        return sharedPreferences.getBoolean(SHOW_BLACK, true)
+    }
+    fun saveShowBlack(b: Boolean) {
+        sharedPreferences.edit().putBoolean(SHOW_BLACK, b).apply()
     }
 
     fun getLastSeen(): Int {

@@ -38,21 +38,26 @@ class GetUserViewModel(
     private val _showRed = MutableLiveData<Boolean>()
     val showRed: LiveData<Boolean> = _showRed
 
-    //showRed checkBox
+    //showYellow checkBox
     private val _showYellow = MutableLiveData<Boolean>()
     val showYellow: LiveData<Boolean> = _showYellow
 
-    //showRed checkBox
+    //showGreen checkBox
     private val _showGreen = MutableLiveData<Boolean>()
     val showGreen: LiveData<Boolean> = _showGreen
 
+    //showBlack checkBox
+    private val _showBlack = MutableLiveData<Boolean>()
+    val showBlack: LiveData<Boolean> = _showBlack
+
     //go to getusersUC
-    fun getUsers(grouId: String, params: UserModel.Params, showRed: Boolean, showYellow: Boolean, showGreen: Boolean) {
+    fun getUsers(grouId: String, params: UserModel.Params, showRed: Boolean, showYellow: Boolean,
+                 showGreen: Boolean, showBlack: Boolean) {
 
         Log.e("NEBUR", "")
 
         viewModelScope.launch {
-            val result = getUsersUseCase.run(grouId, params, showRed, showYellow, showGreen)
+            val result = getUsersUseCase.run(grouId, params, showRed, showYellow, showGreen, showBlack)
             _allUsers.value = result
         }
     }
@@ -95,6 +100,11 @@ class GetUserViewModel(
             userRepository.saveShowGreen(b)
         }
     }
+    fun saveShowBlack(b: Boolean) {
+        viewModelScope.launch {
+            userRepository.saveShowBlack(b)
+        }
+    }
     fun getParams() {
         viewModelScope.launch {
             _sex.value = userRepository.getSex()
@@ -102,6 +112,7 @@ class GetUserViewModel(
             _showRed.value = userRepository.getShowRed()
             _showYellow.value = userRepository.getShowYellow()
             _showGreen.value = userRepository.getShowGreen()
+            _showBlack.value = userRepository.getShowBlack()
         }
     }
 

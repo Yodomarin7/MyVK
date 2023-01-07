@@ -41,6 +41,7 @@ class UserRecyclerAdapter(
                         menu?.add(Menu.NONE, Menu.NONE, 1, "YELLOW")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
                         menu?.add(Menu.NONE, Menu.NONE, 2, "GREEN")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
                         menu?.add(Menu.NONE, Menu.NONE, 3, "NONE")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
+                        menu?.add(Menu.NONE, Menu.NONE, 4, "BLACK")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
                         return true
                     }
 
@@ -81,6 +82,13 @@ class UserRecyclerAdapter(
 
                                 true
                             }
+                            4 -> {
+                                userItem.used = UserModel.Used.BLACK
+                                getUserViewModel.updateUserDao(userItem)
+                                notifyItemChanged(l_position)
+
+                                true
+                            }
                             else -> false
                         }
                     }
@@ -114,6 +122,7 @@ class UserRecyclerAdapter(
             UserModel.Used.RED -> holder.txtUsed.setTextColor(Color.parseColor("#E80606"))
             UserModel.Used.YELLOW -> holder.txtUsed.setTextColor(Color.parseColor("#FACC16"))
             UserModel.Used.GREEN -> holder.txtUsed.setTextColor(Color.parseColor("#21C407"))
+            UserModel.Used.BLACK -> holder.txtUsed.setTextColor(Color.parseColor("#000000"))
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.domain.usecase
 
 import com.example.domain.models.GroupModel
 import com.example.domain.models.UserModel
+import com.example.domain.repository.IGroups
 import com.example.domain.repository.IUsers
 import kotlinx.coroutines.flow.*
 
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.*
 class GetUsersUseCase(private val repository: IUsers) {
 
     suspend fun run(grouId: String,
+                    _offset: Int,
                     user: UserModel.Params,
                     showRed: Boolean,
                     showYellow: Boolean,
@@ -19,12 +21,12 @@ class GetUsersUseCase(private val repository: IUsers) {
         val daoUsers: List<UserModel.Params> = repository.getUsersDao().first()
 
 
-        var offset = 0
+        var offset = _offset
         var vkUsers: UserModel.ResponsParams? = null
 
-        while (items.size < 99) {
-            vkUsers = repository.getUsersVK(grouId, offset, 950, user)
-            offset += 950
+        while (items.size < 21) {
+            vkUsers = repository.getUsersVK(grouId, offset, 999, user)
+            offset += 999
 
             when(vkUsers) {
                 is UserModel.ResponsParams.Failed -> {
@@ -48,8 +50,9 @@ class GetUsersUseCase(private val repository: IUsers) {
                             else if(!showGreen && vk.used == UserModel.Used.GREEN) {  }
                             else if(!showBlack && vk.used == UserModel.Used.BLACK) {  }
                             else {
-                                if(items.size > 99) { return@lit }
                                 items.add(vk)
+                                if(items.size >= 170) { offset += 170
+                                    return@lit }
                             }
                         }
 
@@ -59,6 +62,6 @@ class GetUsersUseCase(private val repository: IUsers) {
         }
 
         return if(items.size < 1) vkUsers!!
-        else UserModel.ResponsParams.Success(items)
+        else UserModel.ResponsParams.Success(items, offset)
     }
 }

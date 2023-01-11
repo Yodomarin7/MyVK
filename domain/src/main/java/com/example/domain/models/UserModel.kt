@@ -16,7 +16,7 @@ class UserModel {
     }
 
     sealed class ResponsParams {
-        class Success(val params: MutableList<Params>): ResponsParams()
+        class Success(val params: MutableList<Params>, val offset: Int): ResponsParams()
         class Failed(val code: Int, val message: String): ResponsParams()
     }
 }

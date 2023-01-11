@@ -10,4 +10,8 @@ class GetGroupsUseCase(private val repository: IGroups) {
     suspend fun run(): Flow<MutableList<GroupModel.Params>> {
         return repository.getGroupsDao()
     }
+
+    suspend fun set(group: GroupModel.Params) {
+        repository.addOneDao(group)
+    }
 }

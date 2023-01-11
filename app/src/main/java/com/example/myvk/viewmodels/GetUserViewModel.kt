@@ -51,13 +51,13 @@ class GetUserViewModel(
     val showBlack: LiveData<Boolean> = _showBlack
 
     //go to getusersUC
-    fun getUsers(grouId: String, params: UserModel.Params, showRed: Boolean, showYellow: Boolean,
+    fun getUsers(grouId: String, offset: Int, params: UserModel.Params, showRed: Boolean, showYellow: Boolean,
                  showGreen: Boolean, showBlack: Boolean) {
 
         Log.e("NEBUR", "")
 
         viewModelScope.launch {
-            val result = getUsersUseCase.run(grouId, params, showRed, showYellow, showGreen, showBlack)
+            val result = getUsersUseCase.run(grouId, offset, params, showRed, showYellow, showGreen, showBlack)
             _allUsers.value = result
         }
     }
@@ -81,6 +81,11 @@ class GetUserViewModel(
         }
     }
     fun saveLastSeen(i: Int) {
+        viewModelScope.launch {
+            userRepository.saveLastSeen(i)
+        }
+    }
+    fun saveOffset(i: Int) {
         viewModelScope.launch {
             userRepository.saveLastSeen(i)
         }

@@ -10,7 +10,7 @@ interface GroupDao {
     @Query("DELETE FROM groups_table WHERE group_id = :groupId")
     suspend fun deleteByGroupId(groupId: Int)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOne(group: GroupEntity)
 
     @Query("SELECT * FROM groups_table ORDER BY id ASC")

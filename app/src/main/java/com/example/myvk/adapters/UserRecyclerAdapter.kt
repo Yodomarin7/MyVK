@@ -5,8 +5,10 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.*
 import android.view.MenuItem.SHOW_AS_ACTION_NEVER
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.view.ActionMode
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.UserModel
 import com.example.myvk.GetUserViewModel
@@ -23,6 +25,7 @@ class UserRecyclerAdapter(
     private val mainActivity = _mainActivity
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)  {
+        private val moreBtn: ImageButton = view.findViewById(R.id.imageButton)
         val txtUser: TextView = view.findViewById(R.id.user)
         val txtUsed: TextView = view.findViewById(R.id.used)
 
@@ -30,74 +33,58 @@ class UserRecyclerAdapter(
             txtUser.movementMethod = LinkMovementMethod.getInstance()
             txtUser.isClickable = true
 
-            view.setOnLongClickListener {
+            moreBtn.setOnClickListener { v->
                 val l_position = adapterPosition
-                val item: UserModel.Params = dataSet[l_position]
+                val userItem: UserModel.Params = dataSet[l_position]
 
-                mainActivity.actionMode = mainActivity.startSupportActionMode(object : ActionMode.Callback {
+                val popup = PopupMenu(mainActivity, v)
+                popup.menu.add(Menu.NONE, Menu.NONE, 0, "RED")
+                popup.menu.add(Menu.NONE, Menu.NONE, 1, "YELLOW")
+                popup.menu.add(Menu.NONE, Menu.NONE, 2, "GREEN")
+                popup.menu.add(Menu.NONE, Menu.NONE, 3, "NONE")
+                popup.menu.add(Menu.NONE, Menu.NONE, 4, "BLACK")
 
-                    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        menu?.add(Menu.NONE, Menu.NONE, 0, "RED")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
-                        menu?.add(Menu.NONE, Menu.NONE, 1, "YELLOW")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
-                        menu?.add(Menu.NONE, Menu.NONE, 2, "GREEN")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
-                        menu?.add(Menu.NONE, Menu.NONE, 3, "NONE")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
-                        menu?.add(Menu.NONE, Menu.NONE, 4, "BLACK")?.setShowAsActionFlags(SHOW_AS_ACTION_NEVER)
-                        return true
-                    }
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem?.order) {
+                        0 -> {
+                            userItem.used = UserModel.Used.RED
+                            getUserViewModel.updateUserDao(userItem)
+                            notifyItemChanged(l_position)
 
-                    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        return false
-                    }
-
-                    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                        val userItem: UserModel.Params = dataSet[l_position]
-                        mainActivity.actionMode?.finish()
-
-                        return when (item?.order) {
-                            0 -> {
-                                userItem.used = UserModel.Used.RED
-                                getUserViewModel.updateUserDao(userItem)
-                                notifyItemChanged(l_position)
-
-                                true
-                            }
-                            1 -> {
-                                userItem.used = UserModel.Used.YELLOW
-                                getUserViewModel.updateUserDao(userItem)
-                                notifyItemChanged(l_position)
-
-                                true
-                            }
-                            2 -> {
-                                userItem.used = UserModel.Used.GREEN
-                                getUserViewModel.updateUserDao(userItem)
-                                notifyItemChanged(l_position)
-
-                                true
-                            }
-                            3 -> {
-                                userItem.used = UserModel.Used.NONE
-                                getUserViewModel.deleteUserDao(userItem.id)
-                                notifyItemChanged(l_position)
-
-                                true
-                            }
-                            4 -> {
-                                userItem.used = UserModel.Used.BLACK
-                                getUserViewModel.updateUserDao(userItem)
-                                notifyItemChanged(l_position)
-
-                                true
-                            }
-                            else -> false
+                            true
                         }
+                        1 -> {
+                            userItem.used = UserModel.Used.YELLOW
+                            getUserViewModel.updateUserDao(userItem)
+                            notifyItemChanged(l_position)
+
+                            true
+                        }
+                        2 -> {
+                            userItem.used = UserModel.Used.GREEN
+                            getUserViewModel.updateUserDao(userItem)
+                            notifyItemChanged(l_position)
+
+                            true
+                        }
+                        3 -> {
+                            userItem.used = UserModel.Used.NONE
+                            getUserViewModel.deleteUserDao(userItem.id)
+                            notifyItemChanged(l_position)
+
+                            true
+                        }
+                        4 -> {
+                            userItem.used = UserModel.Used.BLACK
+                            getUserViewModel.updateUserDao(userItem)
+                            notifyItemChanged(l_position)
+
+                            true
+                        }
+                        else -> false
                     }
-
-                    override fun onDestroyActionMode(mode: ActionMode?) { }
-                })
-                mainActivity.actionMode?.title = item.firstName
-
-                return@setOnLongClickListener true
+                }
+                popup.show()
             }
         }
     }
@@ -113,7 +100,7 @@ class UserRecyclerAdapter(
         val item = dataSet[position]
 
         val str:String = "<a href=\"https://vk.com/id" + item.id + "\">"+ item.firstName +
-                " " + item.lastName + "</a>" + "<br> Был " + item.lastSeen + " дней назад"
+                " " + item.lastName + "</a>" + "<br> Был " + item.lastSeen + " минут назад"
         holder.txtUser.text = Html.fromHtml(str)
         //holder.txtUser.text = "${item.firstName} ${item.lastName}"
 

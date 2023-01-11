@@ -24,7 +24,8 @@ class GroupRepository(
                     id = it.groupId, 
                     screenName = it.screenName,
                     name = it.groupName,
-                    description = it.groupDescription
+                    description = it.groupDescription,
+                    offset = it.groupOffset
                 )
                 groups.add(group)
             }
@@ -43,7 +44,8 @@ class GroupRepository(
             groupId = groupParams.id,
             screenName = groupParams.screenName,
             groupName = groupParams.name,
-            groupDescription = groupParams.description
+            groupDescription = groupParams.description,
+            groupOffset = groupParams.offset
         )
         val dao = dao.insertOne(group)
     }

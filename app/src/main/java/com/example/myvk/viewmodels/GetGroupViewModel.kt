@@ -21,6 +21,12 @@ class GetGroupViewModel(
     val group: LiveData<GroupModel.Params> = _group
     fun setGroup(group: GroupModel.Params) { _group.value = group }
 
+    fun updateGroup(group: GroupModel.Params) {
+        viewModelScope.launch {
+            getGroupsUseCase.set(group)
+        }
+    }
+
     //go to getGroupsUC
     fun getGroups() {
         viewModelScope.launch {

@@ -14,10 +14,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.models.GroupModel
 import com.example.domain.models.UserModel
 import com.example.myvk.*
 import com.example.myvk.adapters.UserRecyclerAdapter
 import com.example.myvk.databinding.FragmentUsersParamsBinding
+import com.example.myvk.extention.hideKeyboard
 import com.example.myvk.viewmodels.GetGroupViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -43,6 +45,7 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
     private lateinit var _showGreen: CheckBox
     private lateinit var _showBlack: CheckBox
     private lateinit var _btnGetUsers: Button
+    private lateinit var _offset: TextInputEditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -106,6 +109,25 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
             }
         }
 
+        _offset = view.findViewById<TextInputLayout>(R.id.editTextOffset).editText as TextInputEditText
+        val vmGroup = getGroupViewModel.group.value
+        if(vmGroup != null) { _offset.setText(vmGroup.offset.toString()) }
+
+        _offset.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus) {
+                if(vmGroup != null) {
+                    val group = GroupModel.Params(
+                        id = vmGroup.id,
+                        screenName = vmGroup.screenName,
+                        name = vmGroup.name,
+                        description = vmGroup.description,
+                        offset = _offset.text.toString().toInt()
+                    )
+                    getGroupViewModel.updateGroup(group)
+                }
+            }
+        }
+
         val items = listOf("Не выбран", "Женский", "Мужской")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
 
@@ -129,6 +151,17 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
                 is UserModel.ResponsParams.Success -> {
                     _paramsView.visibility = GONE
                     _rvView.visibility = VISIBLE
+
+                    if(vmGroup != null) {
+                        val group = GroupModel.Params(
+                            id = vmGroup.id,
+                            screenName = vmGroup.screenName,
+                            name = vmGroup.name,
+                            description = vmGroup.description,
+                            offset = result.offset
+                        )
+                        getGroupViewModel.updateGroup(group)
+                    }
 
                     val myAdapter = UserRecyclerAdapter(result.params, getUserViewModel, mainActivity)
                     recyclerView.adapter = myAdapter
@@ -179,6 +212,8 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
         _btnGetUsers.isEnabled = false
         getUserViewModel.setErrAdd("")
 
+        hideKeyboard()
+
         val sex = _sex.text.toString()
         var intSex = 0
 
@@ -198,10 +233,10 @@ class UserParamsFragment : Fragment(R.layout.fragment_users_params) {
         val gSN = getGroupViewModel.group.value?.screenName
         Log.e("NEBUR", "gId: $gId, gSN: $gSN")
 
-        getUserViewModel.getUsers(gId,
+        getUserViewModel.getUsers(gId, _offset.text.toString().toInt(),
             UserModel.Params(
                 sex = intSex,
-                lastSeen = _lastSeen.text.toString().toInt()
+                lastSeen = _lastSeen.text.toString().toInt(),
             ),
             _showRed.isChecked, _showYellow.isChecked, _showGreen.isChecked, _showBlack.isChecked)
     }

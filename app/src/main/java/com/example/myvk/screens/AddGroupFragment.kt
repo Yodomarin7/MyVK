@@ -72,7 +72,6 @@ class AddGroupFragment : Fragment(R.layout.fragment_add_group) {
                     } else { // др ошибка
                         addGroupViewModel.setErrAdd("Error " + result.message)
                     }
-
                 }
             }
         }

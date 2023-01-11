@@ -18,6 +18,7 @@ class GroupEntity (
     @ColumnInfo(name = "screen_name", collate = NOCASE) val screenName: String,
     @ColumnInfo(name = "group_name") val groupName: String,
     @ColumnInfo(name = "group_description") val groupDescription: String,
+    @ColumnInfo(name = "group_offset") val groupOffset: Int,
 )
 
 /*

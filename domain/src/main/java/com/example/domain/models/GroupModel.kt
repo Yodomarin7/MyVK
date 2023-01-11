@@ -6,7 +6,8 @@ class GroupModel {
         val id: Int = 0,
         val screenName: String = "",
         val name: String = "",
-        val description: String = ""
+        val description: String = "",
+        val offset: Int = 0
     )
 
     sealed class ResponsParams {
